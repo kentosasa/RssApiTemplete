@@ -47,4 +47,5 @@ end
 
 gem 'annotate' #Usage $ annotate
 gem 'pry-rails', :group => :development
+gem 'feedjira'
 
