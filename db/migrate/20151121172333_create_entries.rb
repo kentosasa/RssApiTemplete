@@ -1,0 +1,15 @@
+class CreateEntries < ActiveRecord::Migration
+  def change
+    create_table :entries do |t|
+      t.string :site
+      t.string :title
+      t.text :description
+      t.datetime :content_created_at
+      t.text :text
+      t.text :html
+      t.text :image
+
+      t.timestamps null: false
+    end
+  end
+end
