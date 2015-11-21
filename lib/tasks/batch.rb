@@ -1,11 +1,13 @@
 class Tasks::Batch
   def self.parse
-    url = 'http://hypernews.2chblog.jp/atom.xml'
-    xml = Faraday.get(url).body
-    feed = Feedjira::Feed.parse xml
-    site = feed.title
-    feed.entries.each do |entry|
-      getContent(entry, site)
+    urls = ['http://hypernews.2chblog.jp/atom.xml', 'http://blog.livedoor.jp/dqnplus/atom.xml', 'http://blog.livedoor.jp/news23vip/atom.xml', 'http://blog.livedoor.jp/kinisoku/index.rdf', 'http://news4wide.livedoor.biz/index.rdf']
+    urls.each do |url|
+      xml = Faraday.get(url).body
+      feed = Feedjira::Feed.parse xml
+      site = feed.title
+      feed.entries.each do |entry|
+        getContent(entry, site)
+      end
     end
   end
 
