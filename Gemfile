@@ -45,3 +45,6 @@ group :development do
   gem 'spring'
 end
 
+gem 'annotate' #Usage $ annotate
+gem 'pry-rails', :group => :development
+
