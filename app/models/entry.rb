@@ -12,6 +12,7 @@
 #  image              :text(65535)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  url                :string(255)
 #
 
 class Entry < ActiveRecord::Base

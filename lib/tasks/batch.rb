@@ -25,6 +25,7 @@ class Tasks::Batch
     end
     res = conn.get '', {url: item.url, token: 'ffb1589fc545ecf85b9947b26f758409'}
     result = JSON.parse(res.body)
+    entry.url = item.url
     entry.text = result['objects'][0]['text']
     entry.html = result['objects'][0]['html']
     entry.image = result['objects'][0]['images'][0]['url']
