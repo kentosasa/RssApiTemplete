@@ -1,6 +1,6 @@
 class Tasks::Batch
   def self.parse
-    urls = ['http://hypernews.2chblog.jp/atom.xml', 'http://blog.livedoor.jp/dqnplus/atom.xml', 'http://blog.livedoor.jp/news23vip/atom.xml', 'http://blog.livedoor.jp/kinisoku/index.rdf', 'http://news4wide.livedoor.biz/index.rdf']
+    urls = ['http://blog.livedoor.jp/dqnplus/atom.xml', 'http://blog.livedoor.jp/news23vip/atom.xml', 'http://blog.livedoor.jp/kinisoku/index.rdf', 'http://news4wide.livedoor.biz/index.rdf']
     urls.each do |url|
       xml = Faraday.get(url).body
       feed = Feedjira::Feed.parse xml
