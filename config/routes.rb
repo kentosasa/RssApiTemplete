@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     scope module: :v1 do
+      resources :log do
+        collection do
+          put :access
+        end
+      end
       resources :entries do
         collection do
           get :all
+          get :new_entry
+          get :daily_ranking
+          get :weekly_ranking
+          get :monthly_ranking
+          get :entries
         end
       end
     end
