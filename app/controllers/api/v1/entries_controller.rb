@@ -27,7 +27,7 @@ class Api::V1::EntriesController < ApplicationController
   end
 
   def entries
-    ids = param[:ids]
+    ids = params[:ids]
     entries = []
     ids.each do |id|
       entries << Entry.find(id)
