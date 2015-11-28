@@ -1,7 +1,8 @@
 class Api::V1::AccessLogsController < ApplicationController
   def access
-    entry_id = param[:entry_id]
-    user_id = param[:user_id]
-    AccessLog.crate(entry_id: entry_id, user_id: user_id)
+    entry_id = params[:entry_id]
+    user_id = params[:user_id]
+    AccessLog.create(entry_id: entry_id, user_id: user_id)
+    render json: "OK"
   end
 end

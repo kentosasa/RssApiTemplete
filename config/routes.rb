@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     scope module: :v1 do
-      resources :log do
+      resources :access_logs, :only => [] do
         collection do
-          put :access
+          get :access
         end
       end
-      resources :entries do
+      resources :entries, :only => [] do
         collection do
           get :all
           get :new_entry
