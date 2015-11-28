@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127025525) do
+ActiveRecord::Schema.define(version: 20151128140522) do
 
   create_table "access_logs", force: :cascade do |t|
     t.integer  "entry_id",   limit: 4
@@ -22,13 +22,19 @@ ActiveRecord::Schema.define(version: 20151127025525) do
 
   add_index "access_logs", ["entry_id"], name: "index_access_logs_on_entry_id", using: :btree
 
+  create_table "contents", force: :cascade do |t|
+    t.integer  "entry_id",   limit: 4
+    t.text     "text",       limit: 65535
+    t.text     "html",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "entries", force: :cascade do |t|
     t.string   "site",               limit: 255
     t.string   "title",              limit: 255
     t.text     "description",        limit: 65535
     t.datetime "content_created_at"
-    t.text     "text",               limit: 65535
-    t.text     "html",               limit: 65535
     t.text     "image",              limit: 65535
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false

@@ -13,7 +13,17 @@ Rails.application.routes.draw do
           get :daily_ranking
           get :weekly_ranking
           get :monthly_ranking
-          get :entries
+          get :entry_list
+        end
+      end
+      resources :contents, :only => [] do
+        collection do
+          get :all
+          get :new_entry
+          get :daily_ranking
+          get :weekly_ranking
+          get :monthly_ranking
+          get :entry_list
         end
       end
     end

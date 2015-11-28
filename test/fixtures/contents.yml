@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: contents
+#
+#  id         :integer          not null, primary key
+#  entry_id   :integer
+#  text       :text(65535)
+#  html       :text(65535)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entry_id: 1
+  description: MyText
+  text: MyText
+  html: MyText
+
+two:
+  entry_id: 1
+  description: MyText
+  text: MyText
+  html: MyText

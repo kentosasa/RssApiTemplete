@@ -26,7 +26,7 @@ class Api::V1::EntriesController < ApplicationController
     render json: Entry.all.sort_by { |k| AccessLog.where(entry_id: k[:id]).where("created_at >= ?", now).count }[20 * @page + 0, 20]
   end
 
-  def entries
+  def entry_list
     ids = params[:ids]
     entries = []
     ids.each do |id|

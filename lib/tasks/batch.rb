@@ -13,10 +13,11 @@ class Tasks::Batch
 
   def self.getContent(item, site)
     entry = Entry.new
+    content = Content.new
+
     entry.site = site
     entry.title = item.title
     entry.content_created_at = item.updated
-    entry.description = item.summary
 
     conn = Faraday::Connection.new(:url => 'http://api.diffbot.com/v3/article') do |builder|
       builder.use Faraday::Request::UrlEncoded  # リクエストパラメータを URL エンコードする
@@ -27,10 +28,14 @@ class Tasks::Batch
       res = conn.get '', {url: item.url, token: 'ffb1589fc545ecf85b9947b26f758409'}
       result = JSON.parse(res.body)
       entry.url = item.url
-      entry.text = result['objects'][0]['text']
-      entry.html = result['objects'][0]['html']
       entry.image = result['objects'][0]['images'][0]['url']
+      entry.description = result['objects'][0]['text'][0, 200]
       entry.save
+
+      content.entry_id = entry.id
+      content.text = result['objects'][0]['text']
+      content.html = result['objects'][0]['html']
+      content.save
     rescue
       puts "Error"
     end
