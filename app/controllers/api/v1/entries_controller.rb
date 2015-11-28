@@ -32,7 +32,7 @@ class Api::V1::EntriesController < ApplicationController
     ids.each do |id|
       entries << Entry.find(id)
     end
-    render json: entries
+    render json: entries.sort_by { |k| k[:created_at]}
   end
 
   private
