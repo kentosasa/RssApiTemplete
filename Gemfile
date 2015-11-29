@@ -49,4 +49,5 @@ gem 'annotate' #Usage $ annotate
 gem 'pry-rails', :group => :development
 gem 'feedjira'
 gem "ruby-readability", :require => 'readability'
+gem 'capistrano'
 
