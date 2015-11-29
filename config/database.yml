@@ -51,4 +51,4 @@ production:
   <<: *default
   database: nichannel_production
   username: root
-  password: <%= ENV['NICHANNEL_DATABASE_PASSWORD'] %>
+  password:

@@ -1,4 +1,4 @@
-server   '127.0.0.1',
+server   '52.34.83.184',
   user:  'nichannel',
   roles: %w{app db web},
   ssh_options: {
