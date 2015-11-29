@@ -11,4 +11,5 @@
 #
 
 class Content < ActiveRecord::Base
+  validates_uniqueness_of :entry_id
 end

@@ -15,4 +15,5 @@
 
 class Entry < ActiveRecord::Base
   has_one :content
+  validates_uniqueness_of :title
 end

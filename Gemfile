@@ -56,3 +56,4 @@ gem 'capistrano-rbenv',    require: false
 gem 'capistrano-bundler',  require: false
 gem 'capistrano3-unicorn', require: false
 gem 'slackistrano',        require: false
+gem 'whenever', :require => false

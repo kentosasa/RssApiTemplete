@@ -8,6 +8,8 @@ $ rails runner Tasks::Batch.parse
 ## AWS
 作成時に参考にしたサイト
 
+- http://qiita.com/Yama-to/items/1e1d889e6d5f7cc7f281
+
 ### 設定
 password = いつもの
 root_url = http://52.34.83.184
