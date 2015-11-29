@@ -17,4 +17,6 @@ root_url = http://52.34.83.184
 $ sudo su nichennale
 $ sudo service nginx restart
 $ sudo service mysqld start
+
+$ bundle exec cap production deploy
 ```
