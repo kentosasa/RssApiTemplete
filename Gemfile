@@ -49,5 +49,10 @@ gem 'annotate' #Usage $ annotate
 gem 'pry-rails', :group => :development
 gem 'feedjira'
 gem "ruby-readability", :require => 'readability'
-gem 'capistrano'
-
+gem 'unicorn'
+gem 'capistrano',          require: false
+gem 'capistrano-rails',    require: false
+gem 'capistrano-rbenv',    require: false
+gem 'capistrano-bundler',  require: false
+gem 'capistrano3-unicorn', require: false
+gem 'slackistrano',        require: false
