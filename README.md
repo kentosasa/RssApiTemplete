@@ -4,7 +4,7 @@
 '''
 $ rails runner Tasks::Batch.parse
 
-# cd /var/www/nichannel/current
+$ cd /var/www/nichannel/current
 $ rails runner -e production Tasks::Batch.parse
 '''
 
@@ -25,4 +25,5 @@ $ sudo service mysqld restart
 $ sudo service nginx restart
 
 $ bundle exec cap production deploy
+$ cap production deploy:update_cron
 ```

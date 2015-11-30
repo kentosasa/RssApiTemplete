@@ -18,6 +18,12 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 1.minutes do
+
+# set :environment, 'production'
+# every 15.minutes do
+#   runner "Tasks::Batch.parse"
+# end
+set :environment, 'production'
+every 2.hours do
   runner "Tasks::Batch.parse"
 end
