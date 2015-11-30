@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 5.minutes do
-  command "rails runner Tasks::Batch.parse"
+every 1.minutes do
+  runner "Tasks::Batch.parse"
 end

@@ -15,16 +15,16 @@ class Tasks::Batch
     entry = Entry.new
     content = Content.new
 
-    entry.site = site
-    entry.title = item.title
-    entry.content_created_at = item.updated
-
-    conn = Faraday::Connection.new(:url => 'http://api.diffbot.com/v3/article') do |builder|
-      builder.use Faraday::Request::UrlEncoded  # リクエストパラメータを URL エンコードする
-      builder.use FaradayMiddleware::FollowRedirects
-      builder.use Faraday::Adapter::NetHttp     # Net/HTTP をアダプターに使う
-    end
     begin
+      entry.site = site
+      entry.title = item.title
+      entry.content_created_at = item.updated
+
+      conn = Faraday::Connection.new(:url => 'http://api.diffbot.com/v3/article') do |builder|
+        builder.use Faraday::Request::UrlEncoded  # リクエストパラメータを URL エンコードする
+        builder.use FaradayMiddleware::FollowRedirects
+        builder.use Faraday::Adapter::NetHttp     # Net/HTTP をアダプターに使う
+      end
       res = conn.get '', {url: item.url, token: 'ffb1589fc545ecf85b9947b26f758409'}
       result = JSON.parse(res.body)
       entry.url = item.url

@@ -3,6 +3,9 @@
 データ作成コマンド
 '''
 $ rails runner Tasks::Batch.parse
+
+# cd /var/www/nichannel/current
+$ rails runner -e production Tasks::Batch.parse
 '''
 
 ## AWS
@@ -18,8 +21,8 @@ ssh -i Kento.pem ec2-user@52.34.83.184
 ### コマンドメモ
 ```
 $ sudo su nichennale
+$ sudo service mysqld restart
 $ sudo service nginx restart
-$ sudo service mysqld start
 
 $ bundle exec cap production deploy
 ```

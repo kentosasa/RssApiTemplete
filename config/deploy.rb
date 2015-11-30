@@ -8,10 +8,6 @@ set :deploy_to,     '/var/www/nichannel'
 set :linked_dirs,   fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :keep_releases, 3
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
-
-set :whenever_roles,        ->{ :batch }
-set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
 # set values for slackistrano deployment notifier
 # set :slack_webhook,      'https://hooks.slack.com/services/T02B5F7S3/B0ATNSDB6/ERhof0moz0987uLtiXXXXXX'
 # set :slack_icon_url,     'https://s3-ap-northeast-1.amazonaws.com/tomajax/images/tomato3_small.png'
@@ -44,23 +40,20 @@ namespace :deploy do
       end
     end
   end
+  desc "Update crontab with whenever"
+  task :update_cron do
+    on roles(:app) do
+      with rails_env: :production do
+        within current_path do
+          execute :bundle, :exec, "whenever --update-crontab"
+        end
+      end
+    end
+  end
+  after :finishing, 'deploy:update_cron'
   after :publishing, :restart
   after :restart,    :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do; end
   end
   after :finished,   :cleanup
-end
-namespace :rails do
-  desc 'Open a rails console `cap [staging] rails:console [server_index default: 0]`'
-  task :console do
-    server = roles(:app)[ARGV[2].to_i]
-
-    puts "Opening a console on: #{server.hostname}…."
-
-    cmd = "ssh #{server.user}@#{server.hostname} -t 'cd #{fetch(:deploy_to)}/current && RAILS_ENV=#{fetch(:rails_env)} bundle exec rails console'"
-
-    puts cmd
-
-    exec cmd
-  end
 end
