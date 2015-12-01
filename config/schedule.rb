@@ -24,6 +24,6 @@
 #   runner "Tasks::Batch.parse"
 # end
 set :environment, 'production'
-every 15.minutes do
+every 5.minutes do
   runner "Tasks::Batch.parse"
 end

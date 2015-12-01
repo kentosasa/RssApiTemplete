@@ -25,7 +25,7 @@ class Tasks::Batch
         builder.use FaradayMiddleware::FollowRedirects
         builder.use Faraday::Adapter::NetHttp     # Net/HTTP をアダプターに使う
       end
-      res = conn.get '', {url: item.url, token: 'ffb1589fc545ecf85b9947b26f758409'}
+      res = conn.get '', {url: item.url, token: '22ee9be1be359a9d6b84e456fe081221'}
       result = JSON.parse(res.body)
       entry.url = item.url
       entry.image = result['objects'][0]['images'][0]['url']
