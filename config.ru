@@ -1,8 +1,10 @@
+# This file is used by Rack-based servers to start the application.
+RAILS_RELATIVE_URL_ROOT="/hoge"
 require ::File.expand_path('../config/environment',  __FILE__)
-if ENV['RAILS_RELATIVE_URL_ROOT']
-  map ENV['RAILS_RELATIVE_URL_ROOT'] do
-    run RailsApp::Application
-  end
+if RAILS_RELATIVE_URL_ROOT then
+        map RAILS_RELATIVE_URL_ROOT do
+                run Rails.application
+        end
 else
-  run RailsApp::Application
+        run Rails.application
 end
