@@ -16,4 +16,5 @@
 class Entry < ActiveRecord::Base
   has_one :content
   validates_uniqueness_of :title
+  validates_uniqueness_of :image
 end

@@ -1,17 +1,57 @@
 class Tasks::Batch
   def self.parse
-    urls = ['http://blog.livedoor.jp/dqnplus/atom.xml', 'http://blog.livedoor.jp/news23vip/atom.xml', 'http://blog.livedoor.jp/kinisoku/index.rdf', 'http://news4wide.livedoor.biz/index.rdf']
+    urls = ['http://blog.livedoor.jp/dqnplus/atom.xml', 'http://blog.livedoor.jp/news23vip/atom.xml', 'http://blog.livedoor.jp/kinisoku/index.rdf', 'http://news4wide.livedoor.biz/index.rdf', 'http://news4vip.livedoor.biz/index.rdf', 'http://kanasoku.info/index.rdf', 'http://bipblog.com/index.rdf', 'http://alfalfalfa.com/index.rdf']
     urls.each do |url|
       xml = Faraday.get(url).body
       feed = Feedjira::Feed.parse xml
       site = feed.title
+      fara = Faraday.new
       feed.entries.each do |entry|
-        getContent(entry, site)
+        getContentByReadability(fara, entry, site)
       end
     end
   end
+  # def self.parse
+  #   urls = ['http://blog.livedoor.jp/dqnplus/atom.xml', 'http://blog.livedoor.jp/news23vip/atom.xml', 'http://blog.livedoor.jp/kinisoku/index.rdf', 'http://news4wide.livedoor.biz/index.rdf']
+  #   urls.each do |url|
+  #     xml = Faraday.get(url).body
+  #     feed = Feedjira::Feed.parse xml
+  #     site = feed.title
+  #     feed.entries.each do |entry|
+  #       getContentByDiffBot(entry, site)
+  #     end
+  #   end
+  # end
 
-  def self.getContent(item, site)
+  def self.getContentByReadability(fara, item, site)
+    entry = Entry.new
+    content = Content.new
+
+    begin
+      entry.site = site
+      entry.title = item.title
+      entry.content_created_at = item.updated
+      entry.url = item.url
+
+      res = fara.get item.url
+      images  = Readability::Document.new(res.body, :min_image_height => 200, :min_image_width => 200)
+      doc  = Readability::Document.new(res.body)
+      nokogiri = Nokogiri::HTML(doc.content.encode("UTF-8"))
+      doc.content.encode("UTF-8")
+      entry.image = doc.images[0]
+      entry.description = nokogiri.text[0, 200]
+      entry.save
+
+      content.entry_id = entry.id
+      content.text = nokogiri.text
+      content.html = doc.content.encode("UTF-8")
+      content.save
+    rescue
+      puts "Error"
+    end
+  end
+
+  def self.getContentByDiffBot(item, site)
     entry = Entry.new
     content = Content.new
 
