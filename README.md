@@ -28,3 +28,10 @@ $ sudo service nginx restart
 $ bundle exec cap production deploy
 $ cap production deploy:update_cron
 ```
+
+## エラーメモ
+
+サーバー動いているか確認`ps -ef | grep unicorn | grep -v grep`
+`kill -QUIT tmp/pids/unicorn.pid`サーバーの再起動
+動いてるのに`not found`が出る=>config.ruにサブドメインを設定している可能性がある
+`tail -f log/*`

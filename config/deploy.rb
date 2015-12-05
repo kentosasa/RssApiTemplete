@@ -6,7 +6,7 @@ set :repo_url,      'git@github.com:kentosasa/RssApiTemplete.git'
 set :branch,        'master'
 set :deploy_to,     '/var/www/nichannel'
 set :linked_dirs,   fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-set :keep_releases, 3
+set :keep_releases, 2
 # set values for slackistrano deployment notifier
 # set :slack_webhook,      'https://hooks.slack.com/services/T02B5F7S3/B0ATNSDB6/ERhof0moz0987uLtiXXXXXX'
 # set :slack_icon_url,     'https://s3-ap-northeast-1.amazonaws.com/tomajax/images/tomato3_small.png'
