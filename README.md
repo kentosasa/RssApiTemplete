@@ -32,6 +32,7 @@ $ cap production deploy:update_cron
 ## エラーメモ
 
 サーバー動いているか確認`ps -ef | grep unicorn | grep -v grep`
-`kill -QUIT tmp/pids/unicorn.pid`サーバーの再起動
+`kill -QUIT プロセスID`サーバーの再起動
 動いてるのに`not found`が出る=>config.ruにサブドメインを設定している可能性がある
+ダブドメインを変更した場合は一度サーバーを落とさないと変更が反映されない
 `tail -f log/*`

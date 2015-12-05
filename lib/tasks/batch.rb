@@ -34,8 +34,7 @@ class Tasks::Batch
       entry.url = item.url
 
       res = fara.get item.url
-      images  = Readability::Document.new(res.body, :min_image_height => 200, :min_image_width => 200)
-      doc  = Readability::Document.new(res.body)
+      doc  = Readability::Document.new(res.body, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => false, :min_image_height => 200, :min_image_width => 200)
       nokogiri = Nokogiri::HTML(doc.content.encode("UTF-8"))
       doc.content.encode("UTF-8")
       entry.image = doc.images[0]
