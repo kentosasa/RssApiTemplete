@@ -24,11 +24,13 @@ ActiveRecord::Schema.define(version: 20151128140522) do
 
   create_table "contents", force: :cascade do |t|
     t.integer  "entry_id",   limit: 4
-    t.text     "text",       limit: 65535
-    t.text     "html",       limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "text",       limit: 16777215
+    t.text     "html",       limit: 16777215
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
+
+  add_index "contents", ["entry_id"], name: "index_contents_on_entry_id", using: :btree
 
   create_table "entries", force: :cascade do |t|
     t.string   "site",               limit: 255
