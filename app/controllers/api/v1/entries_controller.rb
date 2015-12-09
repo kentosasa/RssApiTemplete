@@ -5,7 +5,7 @@ class Api::V1::EntriesController < ApplicationController
   end
 
   def new_entry
-    render json: Entry.order("content_created_at DESC")[20 * @page + 0, 20]
+    render json: Entry.order("updated_at DESC")[20 * @page + 0, 20]
   end
 
   def daily_ranking

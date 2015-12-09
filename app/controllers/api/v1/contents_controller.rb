@@ -5,7 +5,7 @@ class Api::V1::ContentsController < ApplicationController
   end
 
   def new_entry
-    render json: Entry.order("content_created_at DESC")[20 * @page + 0, 20].map {|item| item.content }
+    render json: Entry.order("updated_at DESC")[20 * @page + 0, 20].map {|item| item.content }
   end
 
   def daily_ranking
