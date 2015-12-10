@@ -36,7 +36,12 @@ class Tasks::Batch
       res = fara.get item.url
       doc  = Readability::Document.new(res.body, :tags => %w[div p img a font br], :attributes => %w[src href], :remove_empty_nodes => false)
       nokogiri = Nokogiri::HTML(doc.content.encode("UTF-8"))
-      entry.image = doc.images[0]
+      doc.images.each do |image|
+        if Entry.where(image: image).blank?
+          entry.image = image
+          break
+        end
+      end
       entry.description = nokogiri.text[0, 200]
       entry.save
 
