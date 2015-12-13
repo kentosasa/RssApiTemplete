@@ -49,7 +49,6 @@ namespace :deploy do
       end
     end
   end
-  after :finishing, 'deploy:update_cron'
   after :publishing, :restart
   after :restart,    :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do; end
