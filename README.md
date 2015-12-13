@@ -36,3 +36,5 @@ $ cap production deploy:update_cron
 動いてるのに`not found`が出る=>config.ruにサブドメインを設定している可能性がある
 ダブドメインを変更した場合は一度サーバーを落とさないと変更が反映されない
 `tail -f log/*`
+
+git permission deniedされる`$ ssh-add`
