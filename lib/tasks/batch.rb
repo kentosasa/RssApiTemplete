@@ -39,6 +39,7 @@ class Tasks::Batch
           entry.image = attr.value
         end
       end
+      return if entry.image.nil?
       entry.description = nokogiri.text[0, 200]
       if entry.save
         AccessLog.create(entry_id: entry.id, user_id: 0)
