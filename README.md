@@ -4,7 +4,7 @@
 '''
 $ rails runner Tasks::Batch.parse
 
-$ cd /var/www/nichannel/current
+$ cd /var/www/business/current
 $ rails runner -e production Tasks::Batch.parse
 '''
 
@@ -17,7 +17,7 @@ $ rails runner -e production Tasks::Batch.parse
 password = いつもの
 root_url = http://52.34.83.184
 ssh -i Kento.pem ec2-user@52.34.83.184
-ssh -i Kento.pem nichannel@52.34.83.184
+ssh -i Kento.pem business@52.34.83.184
 
 ### コマンドメモ
 ```
