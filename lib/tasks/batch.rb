@@ -1,6 +1,9 @@
 class Tasks::Batch
   def self.parse
-    urls = ['http://blog.livedoor.jp/dqnplus/atom.xml', 'http://blog.livedoor.jp/news23vip/atom.xml', 'http://blog.livedoor.jp/kinisoku/index.rdf', 'http://news4wide.livedoor.biz/index.rdf', 'http://news4vip.livedoor.biz/index.rdf', 'http://kanasoku.info/index.rdf', 'http://bipblog.com/index.rdf', 'http://alfalfalfa.com/index.rdf']
+    #seekingalpha business, wall stories jurnal business, washinton post business, ajc business, fox business, times business, CNN money
+
+    #
+    urls = ['http://seekingalpha.com/analysis/all/most-popular/feed','http://www.wsj.com/xml/rss/3_7014.xml', 'http://feeds.washingtonpost.com/rss/business', 'http://www.ajc.com/flist/business/top-business-headlines/fCb/rss/','http://feeds.foxbusiness.com/foxbusiness/latest', 'http://rss.nytimes.com/services/xml/rss/nyt/Business.xml', 'http://rss.cnn.com/rss/money_news_international.rss']
     urls.each do |url|
       xml = Faraday.get(url).body
       feed = Feedjira::Feed.parse xml
@@ -11,26 +14,14 @@ class Tasks::Batch
       end
     end
   end
-  # def self.parse
-  #   urls = ['http://blog.livedoor.jp/dqnplus/atom.xml', 'http://blog.livedoor.jp/news23vip/atom.xml', 'http://blog.livedoor.jp/kinisoku/index.rdf', 'http://news4wide.livedoor.biz/index.rdf']
-  #   urls.each do |url|
-  #     xml = Faraday.get(url).body
-  #     feed = Feedjira::Feed.parse xml
-  #     site = feed.title
-  #     feed.entries.each do |entry|
-  #       getContentByDiffBot(entry, site)
-  #     end
-  #   end
-  # end
 
   def self.getContentByReadability(fara, item, site)
     entry = Entry.new
     content = Content.new
 
-    begin
       entry.site = site
       entry.title = item.title
-      entry.content_created_at = item.updated
+      entry.content_created_at = DateTime.now
       entry.url = item.url
 
       res = fara.get item.url
@@ -42,16 +33,22 @@ class Tasks::Batch
           break
         end
       end
+      if entry.image.nil?
+        tmp = Nokogiri::HTML(res.body)
+        tmp.xpath("//meta[@property='og:image']/@content").each do |attr|
+          entry.image = attr.value
+        end
+      end
       entry.description = nokogiri.text[0, 200]
-      entry.save
+      if entry.save
+        AccessLog.create(entry_id: entry.id, user_id: 0)
+      end
+      puts "#{Entry.count} #{doc.images} #{item.url}"
 
       content.entry_id = entry.id
       content.text = nokogiri.text
       content.html = doc.content.encode("UTF-8")
       content.save
-    rescue
-      puts "Error"
-    end
   end
 
   def self.getContentByDiffBot(item, site)
@@ -68,12 +65,15 @@ class Tasks::Batch
         builder.use FaradayMiddleware::FollowRedirects
         builder.use Faraday::Adapter::NetHttp     # Net/HTTP をアダプターに使う
       end
+
       res = conn.get '', {url: item.url, token: '22ee9be1be359a9d6b84e456fe081221'}
       result = JSON.parse(res.body)
       entry.url = item.url
       entry.image = result['objects'][0]['images'][0]['url']
       entry.description = result['objects'][0]['text'][0, 200]
-      entry.save
+      if entry.save
+        AccessLog.create(entry_id: entry.id, user_id: 0)
+      end
 
       content.entry_id = entry.id
       content.text = result['objects'][0]['text']

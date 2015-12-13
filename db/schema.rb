@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20151128140522) do
     t.string   "title",              limit: 255
     t.text     "description",        limit: 65535
     t.datetime "content_created_at"
-    t.text     "image",              limit: 65535
+    t.text     "image",              limit: 65535, null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "url",                limit: 255

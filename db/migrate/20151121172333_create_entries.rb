@@ -5,7 +5,7 @@ class CreateEntries < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.datetime :content_created_at
-      t.text :image
+      t.text :image, :null => false
 
       t.timestamps null: false
     end
