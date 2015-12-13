@@ -17,6 +17,7 @@ pid $pid
 preload_app true
 # before starting processes
 before_fork do |server, worker|
+  desc 'Remove Pid'
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
   old_pid = "#{server.config[:pid]}.oldbin"
   if old_pid != server.pid
