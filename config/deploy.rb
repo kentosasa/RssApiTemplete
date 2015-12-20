@@ -3,7 +3,7 @@ lock '3.4.0'
 set :rbenv_ruby,    '2.1.3'
 set :application,   'dansikou'
 set :repo_url,      'git@github.com:kentosasa/RssApiTemplete.git'
-set :branch,        'master'
+set :branch,        'dansikou'
 set :deploy_to,     '/var/www/dansikou'
 set :linked_dirs,   fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :keep_releases, 2
