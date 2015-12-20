@@ -1,10 +1,11 @@
 # RssApiTemplete
 
 データ作成コマンド
+
 '''
 $ rails runner Tasks::Batch.parse
 
-$ cd /var/www/nichannel/current
+$ cd /var/www/dansikou/current
 $ rails runner -e production Tasks::Batch.parse
 '''
 
@@ -17,9 +18,10 @@ $ rails runner -e production Tasks::Batch.parse
 password = いつもの
 root_url = http://52.34.83.184
 ssh -i Kento.pem ec2-user@52.34.83.184
-ssh -i Kento.pem nichannel@52.34.83.184
+ssh -i Kento.pem dansikou@52.34.83.184
 
 ### コマンドメモ
+
 ```
 $ sudo su nichennale
 $ sudo service mysqld restart

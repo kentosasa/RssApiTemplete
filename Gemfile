@@ -58,3 +58,4 @@ gem 'capistrano3-unicorn', require: false
 gem 'slackistrano',        require: false
 gem 'whenever', :require => false
 gem 'fastimage'
+gem 'natto'

@@ -1,10 +1,10 @@
 server   '52.34.83.184',
-  user:  'nichannel',
+  user:  'dansikou',
   roles: %w{app db web},
   ssh_options: {
     keys: [
       # for ec2
-      File.expand_path('~/.ssh/nichannel'),
+      File.expand_path('~/.ssh/dansikou'),
       # for github
       File.expand_path('~/.ssh/id_rsa')
     ],

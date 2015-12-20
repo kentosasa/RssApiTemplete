@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128140522) do
+ActiveRecord::Schema.define(version: 20151220062907) do
 
   create_table "access_logs", force: :cascade do |t|
     t.integer  "entry_id",   limit: 4
@@ -38,9 +38,28 @@ ActiveRecord::Schema.define(version: 20151128140522) do
     t.text     "description",        limit: 65535
     t.datetime "content_created_at"
     t.text     "image",              limit: 65535
+    t.string   "category",           limit: 255
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "url",                limit: 255
   end
+
+  create_table "entry_word_relations", force: :cascade do |t|
+    t.integer  "entry_id",   limit: 4
+    t.integer  "word_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "entry_word_relations", ["entry_id"], name: "index_entry_word_relations_on_entry_id", using: :btree
+  add_index "entry_word_relations", ["word_id"], name: "index_entry_word_relations_on_word_id", using: :btree
+
+  create_table "words", force: :cascade do |t|
+    t.string   "val",        limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "words", ["val"], name: "index_words_on_val", using: :btree
 
 end

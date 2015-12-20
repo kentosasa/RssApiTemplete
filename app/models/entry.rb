@@ -15,6 +15,8 @@
 
 class Entry < ActiveRecord::Base
   has_one :content
+  has_many :entry_word_relations
+  has_many :words, through: :entry_word_relations
   validates_uniqueness_of :title
   validates_uniqueness_of :image
 end

@@ -6,6 +6,7 @@ class CreateEntries < ActiveRecord::Migration
       t.text :description
       t.datetime :content_created_at
       t.text :image
+      t.string :category
 
       t.timestamps null: false
     end
