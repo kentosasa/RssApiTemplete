@@ -15,5 +15,3 @@ require "whenever/capistrano"
 # require 'slackistrano'
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
-default_run_options[:shell] = 'bash -l'
-set :sudo, 'sudo -H'
