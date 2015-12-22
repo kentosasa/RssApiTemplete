@@ -7,8 +7,10 @@ set :branch,        'dansikou'
 set :deploy_to,     '/var/www/dansikou'
 set :linked_dirs,   fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :keep_releases, 2
-set :shell,  'bash -l'
-set :sudo, 'sudo -H'
+set :MECAB_PATH,    "/usr/lib64/libmecab.so.2"
+set :default_env, {
+    'MECAB_PATH' => '/usr/lib64/libmecab.so.2'
+}
 # set values for slackistrano deployment notifier
 # set :slack_webhook,      'https://hooks.slack.com/services/T02B5F7S3/B0ATNSDB6/ERhof0moz0987uLtiXXXXXX'
 # set :slack_icon_url,     'https://s3-ap-northeast-1.amazonaws.com/tomajax/images/tomato3_small.png'

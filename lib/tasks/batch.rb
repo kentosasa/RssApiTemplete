@@ -10,8 +10,8 @@ class Tasks::Batch
         getContentByReadability(fara, entry, site)
       end
     end
-    setWord
-    setCategory
+    # setWord
+    # setCategory
   end
 
   def self.setWord
